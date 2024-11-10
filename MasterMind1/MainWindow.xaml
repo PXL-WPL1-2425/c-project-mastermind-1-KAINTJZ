@@ -27,30 +27,26 @@
         <!-- Bovenkant van de UI, DE SELECTOR-->
         <!-- Stackpanel = Orientation is Horizontal for display (naast elkaar) -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 50 0 0">
-
             <!-- Eerste ComboBox -->
             <ComboBox Name="RandomColorComboBox1" ItemTemplate="{StaticResource ColorTemplate}" Width="110" Margin="5" SelectionChanged="ComboBox_SelectionChanged"/>
-
             <!-- Tweede ComboBox -->
             <ComboBox Name="RandomColorComboBox2" ItemTemplate="{StaticResource ColorTemplate}" Width="110" Margin="5" SelectionChanged="ComboBox_SelectionChanged"/>
-
             <!-- Derde ComboBox -->
             <ComboBox Name="RandomColorComboBox3" ItemTemplate="{StaticResource ColorTemplate}" Width="110" Margin="5" SelectionChanged="ComboBox_SelectionChanged"/>
-
             <!-- Vierde ComboBox -->
             <ComboBox Name="RandomColorComboBox4" ItemTemplate="{StaticResource ColorTemplate}" Width="110" Margin="5" SelectionChanged="ComboBox_SelectionChanged"/>
         </StackPanel>
 
         <!-- Buttons -->
         <Button 
-        HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-        Height="82" Width="166" Foreground="White"  BorderBrush="{x:Null}"  
-        FontWeight="UltraBlack" FontFamily="Segoe UI Black" Padding="0"
-        BorderThickness="0,0,0,0" Margin="0,120,0,0"
-        Click="Button_CheckColorCombination">
-            <TextBlock  Text="CHECK COLOR&#xD;&#xA;COMBINATION" 
-            TextAlignment="Center" VerticalAlignment="Center" 
-            HorizontalAlignment="Center"/>
+            HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+            Height="82" Width="166" Foreground="White"  BorderBrush="{x:Null}"  
+            FontWeight="UltraBlack" FontFamily="Segoe UI Black" Padding="0"
+            BorderThickness="0,0,0,0" Margin="0,217,0,0"
+            Click="Button_CheckColorCombination">
+            <TextBlock Text="CHECK COLOR&#xD;&#xA;COMBINATION" 
+                      TextAlignment="Center" VerticalAlignment="Center" 
+                      HorizontalAlignment="Center"/>
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
@@ -61,14 +57,14 @@
 
         <!-- Leave game button-->
         <Button 
-       HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-       Height="82" Width="100" Foreground="White"  BorderBrush="{x:Null}"  
-       FontWeight="UltraBlack" FontFamily="Segoe UI Black" Padding="0"
-       BorderThickness="0,0,0,0" Margin="0,249,0,0"
-       Click="Button_LeaveGame">
-            <TextBlock  Text="Leave Game"
-            TextAlignment="Center" VerticalAlignment="Center" 
-            HorizontalAlignment="Center"/>
+            HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+            Height="82" Width="100" Foreground="White"  BorderBrush="{x:Null}"  
+            FontWeight="UltraBlack" FontFamily="Segoe UI Black" Padding="0"
+            BorderThickness="0,0,0,0" Margin="385,339,0,0"
+            Click="Button_LeaveGame">
+            <TextBlock Text="Leave Game"
+                      TextAlignment="Center" VerticalAlignment="Center" 
+                      HorizontalAlignment="Center"/>
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
@@ -80,5 +76,12 @@
         <!-- Labels -->
         <Label Content="Welkom bij MasterMind!" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Black" Foreground="White" />
         <Label Content="A SpicyGames Creation" HorizontalAlignment="Left" Margin="32,385,0,0" VerticalAlignment="Top"  Foreground="White"/>
+        <Label Content="Kies de kleuren" HorizontalAlignment="Center" Margin="0,27,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Black" Foreground="White" />
+
+        <!-- Kleur Labels -->
+        <Label x:Name="SelectedColorLabel1" Margin="10,77,370,242" Background="White" />
+        <Label x:Name="SelectedColorLabel2" Margin="130,77,250,242" Background="White"/>
+        <Label x:Name="SelectedColorLabel3" Margin="250,77,130,242" Background="White"/>
+        <Label x:Name="SelectedColorLabel4" Margin="370,77,10,242" Background="White"/>
     </Grid>
 </Window>
