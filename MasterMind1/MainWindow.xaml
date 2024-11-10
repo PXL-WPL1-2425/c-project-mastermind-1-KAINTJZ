@@ -7,49 +7,22 @@
         mc:Ignorable="d"
         Height="450" Width="500" Background="#FF272E35">
     <Grid>
+        
         <!-- Bovenkant van de UI, DE SELECTOR-->
         <!-- Stackpanel = Orientation is Horizontal for display ( naast elkaar ) -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 50 0 0">
+            
             <!-- Eerste ComboBox -->
-            <ComboBox Width="110" Margin="5">
-                <ComboBoxItem Content="Rood"/>
-                <!-- De items moest nog niet maar als een soort test.-->
-                <ComboBoxItem Content="Geel"/>
-                <ComboBoxItem Content="Oranje"/>
-                <ComboBoxItem Content="Wit"/>
-                <ComboBoxItem Content="Groen"/>
-                <ComboBoxItem Content="Blauw"/>
-            </ComboBox>
+            <ComboBox Width="110" Margin="5"/>
+
             <!-- Tweede ComboBox -->
-            <ComboBox Width="110" Margin="5">
-                <ComboBoxItem Content="Rood"/>
-                <ComboBoxItem Content="Geel"/>
-                <ComboBoxItem Content="Oranje"/>
-                <ComboBoxItem Content="Wit"/>
-                <ComboBoxItem Content="Groen"/>
-                <ComboBoxItem Content="Blauw"/>
-            </ComboBox>
+            <ComboBox Width="110" Margin="5"/>
+
             <!-- Derde ComboBox -->
-            <ComboBox Width="110" Margin="5">
-                <ComboBoxItem Content="Rood"/>
-                <ComboBoxItem Content="Geel"/>
-                <ComboBoxItem Content="Oranje"/>
-                <ComboBoxItem Content="Wit"/>
-                <ComboBoxItem Content="Groen"/>
-                <ComboBoxItem Content="Blauw"/>
-            </ComboBox>
+            <ComboBox Width="110" Margin="5"/>
+
             <!-- Vierde ComboBox -->
-            <ComboBox Width="110" Margin="5">
-                <ComboBoxItem Content="Rood"/>
-                <ComboBoxItem Content="Geel"/>
-                <ComboBoxItem Content="Oranje"/>
-                <ComboBoxItem Content="Wit"/>
-                <ComboBoxItem Content="Groen"/>
-                <ComboBoxItem Content="Blauw"/>
-            </ComboBox>
-
-
-
+            <ComboBox Width="110" Margin="5"/>
 
 
         </StackPanel>
@@ -66,8 +39,8 @@
         >
 
             <TextBlock  Text="CHECK COLOR&#xD;&#xA;COMBINATION" 
-    TextAlignment="Center" VerticalAlignment="Center" 
-    HorizontalAlignment="Center"/>
+            TextAlignment="Center" VerticalAlignment="Center" 
+            HorizontalAlignment="Center"/>
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
@@ -83,11 +56,11 @@
        FontWeight="UltraBlack" FontFamily="Segoe UI Black" Padding="0"
        BorderThickness="0,0,0,0" Margin="0,249,0,0"
        Click="Button_LeaveGame"
- >
+                                >
 
             <TextBlock  Text="Leave Game"
-    TextAlignment="Center" VerticalAlignment="Center" 
-    HorizontalAlignment="Center"/>
+            TextAlignment="Center" VerticalAlignment="Center" 
+            HorizontalAlignment="Center"/>
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
@@ -97,17 +70,9 @@
         </Button>
 
 
-
-
-
-
-
-
-
         <!-- Labels -->
         <Label Content="Welkom bij MasterMind!" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Black" Foreground="White" />
         <Label Content="A SpicyGames Creation" HorizontalAlignment="Left" Margin="32,385,0,0" VerticalAlignment="Top"  Foreground="White"/>
-
 
 
     </Grid>
