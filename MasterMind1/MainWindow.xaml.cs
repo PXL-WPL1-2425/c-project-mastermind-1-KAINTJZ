@@ -15,7 +15,7 @@ namespace MasterMind1
     public partial class MainWindow : Window
     {
         private List<string> availibleColors = new List<string> { "Rood", "Geel", "Oranje", "Wit", "Groen", "Blauw" };
-        private List<string> secretCode = new List<string>(); 
+        private List<string> secretCode = new List<string>();
 
         public MainWindow()
         {
@@ -104,10 +104,65 @@ namespace MasterMind1
         // Kleuren checker
         private void Button_CheckColorCombination(object sender, RoutedEventArgs e)
         {
+            // Haal de geselecteerde kleuren van de ComboBoxen
+            List<string> userCode = new List<string>
+            {
+            (RandomColorComboBox1.SelectedItem as ColorItem)?.Name,
+            (RandomColorComboBox2.SelectedItem as ColorItem)?.Name,
+            (RandomColorComboBox3.SelectedItem as ColorItem)?.Name,
+            (RandomColorComboBox4.SelectedItem as ColorItem)?.Name
+                };
+
+            // Controleren of elke kleur overeenkomt met de geheime code
+            for (int i = 0; i < 4; i++)
+            {
+                if (userCode[i] == secretCode[i])
+                {
+                    // Kleur is op de juiste plaats (donkerrood)
+                    SetBorderColor(i, Colors.DarkRed);
+                }
+                else if (secretCode.Contains(userCode[i]))
+                {
+                    // Kleur komt voor, maar niet op de juiste plaats (wit)
+                    SetBorderColor(i, Colors.Wheat);
+                }
+                else
+                {
+                    // Geen overeenkomst (geen rand)
+                    SetBorderColor(i, Colors.Transparent);
+                }
+            }
 
         }
 
-        // Om applicatie te sluiten
+        
+
+        // Functie om de randkleur van de labels te veranderen
+        private void SetBorderColor(int index, Color borderColor)
+        {
+            switch (index)
+            {
+                case 0:
+                    SelectedColorLabel1.BorderBrush = new SolidColorBrush(borderColor);
+                    break;
+                case 1:
+                    SelectedColorLabel2.BorderBrush = new SolidColorBrush(borderColor);
+                    break;
+                case 2:
+                    SelectedColorLabel3.BorderBrush = new SolidColorBrush(borderColor);
+                    break;
+                case 3:
+                    SelectedColorLabel4.BorderBrush = new SolidColorBrush(borderColor);
+                    break;
+            }
+
+
+
+
+
+        }
+
+        // Button voor de Leave Game functie
         private void Button_LeaveGame(object sender, RoutedEventArgs e)
         {
             Close();
