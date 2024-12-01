@@ -16,6 +16,7 @@ namespace MasterMind1
     {
         private List<string> availibleColors = new List<string> { "Rood", "Geel", "Oranje", "Wit", "Groen", "Blauw" };
         private List<string> secretCode = new List<string>();
+        private List<string> userCode = new List<string>(); // Toevoeging voor userCode
 
         public MainWindow()
         {
@@ -42,7 +43,6 @@ namespace MasterMind1
         // ComboBoxen vullen met beschikbare kleuren
         private void ComboBoxesKleurVuller()
         {
-            // Maak een lijst van ColorItem objecten met kleur en naam
             var colors = new List<ColorItem>
             {
                 new ColorItem { Name = "Rood", Color = Colors.Red },
@@ -53,45 +53,37 @@ namespace MasterMind1
                 new ColorItem { Name = "Blauw", Color = Colors.Blue }
             };
 
-            // Voeg de kleuren toe aan elke ComboBox
             RandomColorComboBox1.ItemsSource = colors;
             RandomColorComboBox2.ItemsSource = colors;
             RandomColorComboBox3.ItemsSource = colors;
             RandomColorComboBox4.ItemsSource = colors;
         }
 
-        // Om kleur gegevens vast te stellen
         public class ColorItem
         {
             public required string Name { get; set; }
             public Color Color { get; set; }
         }
 
-        // Als je 1 van de ComboBoxen selectie veranderd dan:
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Haal de geselecteerde kleur op voor de juiste ComboBox
             ComboBox comboBox = sender as ComboBox;
             ColorItem selectedItem = comboBox.SelectedItem as ColorItem;
 
             if (selectedItem != null)
             {
-                // Toon de naam van de geselecteerde kleur in de bijbehorende Label
                 if (comboBox.Name == "RandomColorComboBox1")
                 {
                     SelectedColorLabel1.Background = new SolidColorBrush(selectedItem.Color);
                 }
-
                 else if (comboBox.Name == "RandomColorComboBox2")
                 {
                     SelectedColorLabel2.Background = new SolidColorBrush(selectedItem.Color);
                 }
-
                 else if (comboBox.Name == "RandomColorComboBox3")
                 {
                     SelectedColorLabel3.Background = new SolidColorBrush(selectedItem.Color);
                 }
-
                 else if (comboBox.Name == "RandomColorComboBox4")
                 {
                     SelectedColorLabel4.Background = new SolidColorBrush(selectedItem.Color);
@@ -99,45 +91,33 @@ namespace MasterMind1
             }
         }
 
-        // Button functies: 
-
-        // Kleuren checker
         private void Button_CheckColorCombination(object sender, RoutedEventArgs e)
         {
-            // Haal de geselecteerde kleuren van de ComboBoxen
-            List<string> userCode = new List<string>
+            userCode = new List<string>
             {
-            (RandomColorComboBox1.SelectedItem as ColorItem)?.Name,
-            (RandomColorComboBox2.SelectedItem as ColorItem)?.Name,
-            (RandomColorComboBox3.SelectedItem as ColorItem)?.Name,
-            (RandomColorComboBox4.SelectedItem as ColorItem)?.Name
-                };
+                (RandomColorComboBox1.SelectedItem as ColorItem)?.Name,
+                (RandomColorComboBox2.SelectedItem as ColorItem)?.Name,
+                (RandomColorComboBox3.SelectedItem as ColorItem)?.Name,
+                (RandomColorComboBox4.SelectedItem as ColorItem)?.Name
+            };
 
-            // Controleren of elke kleur overeenkomt met de geheime code
             for (int i = 0; i < 4; i++)
             {
                 if (userCode[i] == secretCode[i])
                 {
-                    // Kleur is op de juiste plaats (donkerrood)
                     SetBorderColor(i, Colors.DarkRed);
                 }
                 else if (secretCode.Contains(userCode[i]))
                 {
-                    // Kleur komt voor, maar niet op de juiste plaats (wit)
                     SetBorderColor(i, Colors.Wheat);
                 }
                 else
                 {
-                    // Geen overeenkomst (geen rand)
                     SetBorderColor(i, Colors.Transparent);
                 }
             }
-
         }
 
-        
-
-        // Functie om de randkleur van de labels te veranderen
         private void SetBorderColor(int index, Color borderColor)
         {
             switch (index)
@@ -155,17 +135,70 @@ namespace MasterMind1
                     SelectedColorLabel4.BorderBrush = new SolidColorBrush(borderColor);
                     break;
             }
-
-
-
-
-
         }
 
-        // Button voor de Leave Game functie
         private void Button_LeaveGame(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        int maxAttemptsUser = 10;
+        int currentAttempt = 0;
+        bool gameEnded = false;
+
+        private void ReduceAttempts()
+        {
+            currentAttempt++;
+            int attemptsLeft = maxAttemptsUser - currentAttempt;
+
+            AttemptsLeftLabel.Content = $"Pogingen over: {attemptsLeft}";
+
+            if (attemptsLeft <= 0)
+            {
+                MessageBox.Show($"Je hebt verloren! De geheime code was: {string.Join(", ", secretCode)}", "Game Over", MessageBoxButton.OK, MessageBoxImage.Information);
+                ResetGame();
+            }
+        }
+
+        private void ResetGame()
+        {
+            maxAttemptsUser = 10;
+            currentAttempt = 0;
+            gameEnded = false;
+            GenerateRandomKleur();
+            ClearUI();
+        }
+
+        private void ClearUI()
+        {
+            RandomColorComboBox1.SelectedItem = null;
+            RandomColorComboBox2.SelectedItem = null;
+            RandomColorComboBox3.SelectedItem = null;
+            RandomColorComboBox4.SelectedItem = null;
+
+            SelectedColorLabel1.Background = new SolidColorBrush(Colors.White);
+            SelectedColorLabel2.Background = new SolidColorBrush(Colors.White);
+            SelectedColorLabel3.Background = new SolidColorBrush(Colors.White);
+            SelectedColorLabel4.Background = new SolidColorBrush(Colors.White);
+
+            SetBorderColor(0, Colors.Transparent);
+            SetBorderColor(1, Colors.Transparent);
+            SetBorderColor(2, Colors.Transparent);
+            SetBorderColor(3, Colors.Transparent);
+
+            AttemptsLeftLabel.Content = $"Pogingen over: {maxAttemptsUser}";
+        }
+
+        private void Button_CheckColorCombination2(object sender, RoutedEventArgs e)
+        {
+            if (userCode.SequenceEqual(secretCode))
+            {
+                MessageBox.Show("Gefeliciteerd! Je hebt de geheime code geraden!", "Winnaar", MessageBoxButton.OK, MessageBoxImage.Information);
+                gameEnded = true;
+                return;
+            }
+
+            ReduceAttempts();
         }
     }
 }
